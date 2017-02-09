@@ -1,0 +1,27 @@
+public class ChuckController {
+
+    @testVisible
+    private class JsonJoke {
+        public String type { get;set; }
+        public JokeValue value { get;set; }   
+    }
+
+    @testVisible
+    private class JokeValue {
+        public String joke { get;set; }
+    }
+
+    @AuraEnabled
+    public static String getChucked(String firstN, String secondN) {
+     HttpRequest req = new HttpRequest();
+     req.setEndpoint('http://api.icndb.com/jokes/random?firstName=' + firstN +
+                     '&lastName=' + secondN +
+                     '&limitTo=nerdy');
+     req.setMethod('GET');
+     Http http = new Http();
+     HTTPResponse res = http.send(req);
+     JsonJoke jsjk = (JsonJoke)JSON.deserialize(res.getBody(), JsonJoke.class);
+     return jsjk.value.joke;
+   }
+    
+}

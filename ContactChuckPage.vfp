@@ -1,0 +1,14 @@
+<apex:page standardController="Contact">
+    <apex:includeLightning />
+    <div id="chuckLine" />
+    <script>
+        $Lightning.use("c:ContactChuckerApp", function() {
+          $Lightning.createComponent("c:ContactChucker",
+          { firstN: "{!Contact.firstName}",
+            secondN: "{!Contact.lastName}" },
+          "chuckLine",
+          function(cmp) {}
+          );
+        });
+    </script>
+</apex:page>

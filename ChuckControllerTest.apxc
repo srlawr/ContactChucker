@@ -1,0 +1,25 @@
+@isTest
+global class ChuckControllerTest {
+
+    global class NeverMockChuckService implements HttpCalloutMock {
+        global HTTPResponse respond(HTTPRequest req) {
+            HTTPResponse res = new HTTPResponse();
+            ChuckController.JokeValue jv = new ChuckController.JokeValue();
+            jv.joke = 'MS Dynamics';
+            ChuckController.JsonJoke jj = new ChuckController.JsonJoke();
+            jj.type = 'joke';
+            jj.value = jv;
+            res.setBody(JSON.serialize(jj));
+            return res;
+        }
+    }
+
+    @isTest
+    public static void auraComponent_HttpMocked_ReturnsResult() {
+        Test.setMock(HttpCalloutMock.class, new NeverMockChuckService());
+        String quote = ChuckController.getChucked('Simon','Lawrence');
+        
+        System.assertEquals('MS Dynamics', quote);
+    }
+    
+}

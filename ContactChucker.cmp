@@ -1,0 +1,7 @@
+<aura:component controller="ChuckController">
+    <aura:attribute name="firstN" type="string" default="Chuck" />
+    <aura:attribute name="secondN" type="string" default="Norris" />
+    <aura:attribute name="quote" type="string" />
+    <aura:handler name="init" value="{!this}" action="{!c.requestQuote}" />
+    <ui:outputText value="{!v.quote}"/>
+</aura:component>
