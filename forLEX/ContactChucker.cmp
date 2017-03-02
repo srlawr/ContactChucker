@@ -1,0 +1,5 @@
+<aura:component controller="ChuckController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="quote" type="string" />
+    <aura:handler name="init" value="{!this}" action="{!c.requestQuote}" />
+    <ui:outputText value="{!v.quote}"/>
+</aura:component>
